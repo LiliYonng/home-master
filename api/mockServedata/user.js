@@ -44,7 +44,7 @@ function getParam(url) {
   if (!search) {
     return {}
   }
-  const res = JSON.parse(
+  return JSON.parse(
     '{"' +
       decodeURIComponent(search)
         .replace(/"/g, '\\"')
@@ -52,8 +52,6 @@ function getParam(url) {
         .replace(/=/g, '":"') +
       '"}'
   )
-  console.log(res)
-  return res
 }
 //这里的page和limit在url不带参数时为默认值
 export default {

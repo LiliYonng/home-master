@@ -18,3 +18,10 @@ export const getUserData = (params) => {
     params
   })
 }
+export const getPermission = (params) => {
+  return axios.request({
+    url: 'login/getPermission',
+    method: 'get',
+    params
+  })
+}
