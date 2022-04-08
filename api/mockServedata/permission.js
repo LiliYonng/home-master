@@ -6,7 +6,9 @@ const userList = [
     password: 'admin',
     token: Mock.Random.guid(),
     identity: 'Admin',
-    LoginInfo: {
+    userInfo: {
+      name: '超级管理员',
+      Profilephoto: '/adminImg.jpg',
       date: Mock.mock('@date("2022-MM-dd")'),
       location: Mock.mock('@province')
     }
@@ -16,7 +18,9 @@ const userList = [
     password: '123456',
     token: Mock.Random.guid(),
     identity: 'Ordinary',
-    LoginInfo: {
+    userInfo: {
+      name: '邓邓等等噔',
+      Profilephoto: '/userImg1.jpg',
       date: Mock.mock('@date("2022-MM-dd")'),
       location: Mock.mock('@province')
     }
@@ -26,7 +30,9 @@ const userList = [
     password: '654321',
     token: Mock.Random.guid(),
     identity: 'Ordinary',
-    LoginInfo: {
+    userInfo: {
+      name: '王志英小号',
+      Profilephoto: '/userImg2.jpg',
       date: Mock.mock('@date("2022-MM-dd")'),
       location: Mock.mock('@province')
     }
@@ -38,14 +44,14 @@ const normalMenu = [
     name: 'home',
     label: '首页',
     icon: 'HomeFilled',
-    url: 'Home/Home'
+    url: '/HomeView'
   },
   {
     path: '/mall',
     name: 'mall',
     label: '商品管理',
     icon: 'Briefcase',
-    url: 'MallManage/MallManage'
+    url: '/MallView'
   },
 
   {
@@ -57,24 +63,25 @@ const normalMenu = [
         name: 'page1',
         label: '页面1',
         icon: 'Setting',
-        url: 'Other/PageOne'
+        url: '/Other/PageOne'
       },
       {
         path: '/page2',
         name: 'page2',
         label: '页面2',
         icon: 'Setting',
-        url: 'Other/PageTwo'
+        url: '/Other/PageTwo'
       }
     ]
   }
 ]
-const manageMenu = [...normalMenu].push({
+const manageMenu = [...normalMenu]
+manageMenu.push({
   path: '/user',
   name: 'user',
   label: '用户管理',
   icon: 'UserFilled',
-  url: 'UserManage/UserManage'
+  url: '/UserView'
 })
 function getParam(url) {
   const search = url.split('?')[1]
@@ -93,7 +100,7 @@ function getParam(url) {
 
 export default {
   getPermi: (config) => {
-    let Obj = {}
+    let Obj = null
     const params = getParam(config.url)
     userList.forEach((item) => {
       if (item.account === params.UserName) {
@@ -103,7 +110,7 @@ export default {
                 code: 200,
                 token: item.token,
                 menu: item.identity === 'Admin' ? manageMenu : normalMenu,
-                userInfo: item.LoginInfo
+                userInfo: item.userInfo
               }
             : { code: 600, ERR_Msg: '用户密码错误' }
       }

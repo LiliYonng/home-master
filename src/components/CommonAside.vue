@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { getMenu } from "../../api/data.js";
+import store from "@/store";
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -64,14 +64,7 @@ const activeName = computed(() => {
   return active ? active.name : null;
 });
 onMounted(() => {
-  getMenu()
-    .then((ref) => {
-      const { code, menuData } = ref.data;
-      if (code === 20000) {
-        menu.value = menuData;
-      }
-    })
-    .catch((err) => console.log(err.message));
+  menu.value = store.state.menu.menuData;
 });
 </script>
 

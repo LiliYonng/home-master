@@ -186,14 +186,7 @@ export default {
             icon: 'GoodsFilled',
             color: '#5ab1ef'
           }
-        ],
-        //用户信息数据
-        userInfo: {
-          name: 'Admin',
-          identity: '超级管理员',
-          date: '2022-3-1',
-          location: '广州'
-        }
+        ]
       }
     }
   }

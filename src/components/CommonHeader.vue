@@ -32,14 +32,14 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
 import { computed } from "@vue/reactivity";
 import { Menu as IconMenu } from "@element-plus/icons-vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-
-const userImg = require("@/assets/userImg.jpg");
 const Store = useStore();
 const Router = useRouter();
+const userImg = ref("");
 const handleMenu = () => {
   Store.commit("handleMenu");
 };
@@ -53,8 +53,13 @@ const selectMenu = (item) => {
 };
 const logout = () => {
   Store.commit("clearToken");
+  Store.commit("clearMenu");
+  Store.commit("clearUserInfo");
   Router.push({ name: "login" });
 };
+onMounted(() => {
+  userImg.value = require("../assets" + Store.state.user.userInfo.Profilephoto);
+});
 </script>
 
 <style lang="less">

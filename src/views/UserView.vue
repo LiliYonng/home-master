@@ -111,7 +111,6 @@ const totalPage = ref(null);
 const showForm = ref(false);
 const currentPage = ref(1);
 const getData = (name = "", page) => {
-  console.log("加载table视图.页数" + page);
   getUserData({ name, page })
     .then((res) => {
       console.log(res);

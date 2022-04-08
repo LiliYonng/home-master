@@ -6,38 +6,17 @@ const routes = [
     path: '/',
     name: 'main',
     component: MainView,
-    children: [
-      {
-        path: '/home',
-        name: 'home',
-        component: () => import('../views/HomeView.vue')
-      },
-      {
-        path: '/mall',
-        name: 'mall',
-        component: () => import('../views/MallView.vue')
-      },
-      {
-        path: '/user',
-        name: 'user',
-        component: () => import('../views/UserView.vue')
-      },
-      {
-        path: '/page1',
-        name: 'page1',
-        component: () => import('../views/OtherView.vue')
-      },
-      {
-        path: '/page2',
-        name: 'page2',
-        component: () => import('../views/OtherView.vue')
-      }
-    ]
+    children: []
   },
   {
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/NotFound')
   }
 ]
 

@@ -28,39 +28,35 @@
 import { ref } from "vue";
 import { Edit, User } from "@element-plus/icons-vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { getPermission } from "../../api/data";
 const form = ref({ UserName: "", Password: "" });
 const rules = ref({
   UserName: [
     { required: true, message: "Please input Activity name", trigger: "blur" },
-    { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+    { min: 3, message: "用户名长度不少于3", trigger: "blur" },
   ],
-  Password: [
-    { required: true, message: "Please input Activity password", trigger: "blur" },
-  ],
+  Password: [{ required: true, message: "请输入正确的密码", trigger: "blur" }],
 });
 const formRef = ref(null);
-
 const router = useRouter();
 const store = useStore();
 const submitForm = () => {
-  getPermission(form.value).then((res) => {
-    if (res.data.code === 200) {
+  getPermission(form.value)
+    .then((res) => {
+      if (res.data.code === 200) {
+        store.commit("setToken", res.data.token);
+        store.commit("setMenu", res.data.menu);
+        store.commit("setUserInfo", res.data.userInfo);
+        store.commit("addMenu", router);
+        router.push({ name: "home" });
+      } else if (res.data.code === 600) ElMessage.error("密码错误，请重试");
+      else if (res.data.code === 601) ElMessage.error("用户不存在，请注册账号");
+      else return;
+    })
+    .catch((res) => {
       console.log(res);
-      //store.commit("setToken", token);
-      //router.push({ name: "home" });
-    }
-  });
-  let arr = [1, 2, 3];
-  store.commit("setMenu", arr);
-  arr.push(4);
-  let a = store.commit("getMenu");
-  console.log(a);
-  //用mock模拟后端返回登陆权限
-  // const token = Mock.Random.guid()
-  // store.commit('setToken',token)
-  // router.push({name:'home'})
+    });
 };
 </script>
 

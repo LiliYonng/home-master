@@ -6,8 +6,8 @@
         <div class="user">
           <img :src="userImg" />
           <div class="userinfo">
-            <p class="name">{{ userInfo.name }}</p>
-            <p class="acess">{{ userInfo.identity }}</p>
+            <p class="name">昵称:{{ userInfo.name }}</p>
+            <p class="acess">普通用户</p>
           </div>
         </div>
         <div class="login-info">
@@ -74,7 +74,9 @@
 import { useEchart } from "../../api/useEchart";
 import { onMounted, ref } from "vue";
 import { getData } from "../../api/data.js";
-const userImg = require("@/assets/userImg.jpg");
+import { useStore } from "vuex";
+const store = useStore();
+const userImg = ref("");
 const tableData = ref([]);
 const tableLabel = ref({});
 const countData = ref([]);
@@ -105,14 +107,13 @@ const pieChart = ref(null);
 const barChart = ref(null);
 
 onMounted(() => {
+  userInfo.value = store.state.user.userInfo;
+  userImg.value = require("../assets" + userInfo.value.Profilephoto);
   //getData是二次封装的axios请求，使用mock拦截请求返回模拟数据
   getData()
     .then((res) => {
       const { code, data } = res.data;
       if (code === 20000) {
-        //用户卡片数据
-        userInfo.value = data.userInfo;
-
         //获取表格数据
         tableData.value = data.tableData;
         tableLabel.value = data.tableLabel;
