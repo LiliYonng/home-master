@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
-import user from '@/store/user'
-import tab from '@/store/tab'
+import user from './user'
+import tab from './tab'
+import menu from './menu'
 export default createStore({
   state: {},
   getters: {},
@@ -8,6 +9,7 @@ export default createStore({
   actions: {},
   modules: {
     user,
-    tab
+    tab,
+    menu
   }
 })

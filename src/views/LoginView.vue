@@ -46,8 +46,17 @@ const router = useRouter();
 const store = useStore();
 const submitForm = () => {
   getPermission(form.value).then((res) => {
-    console.log(res);
+    if (res.data.code === 200) {
+      console.log(res);
+      //store.commit("setToken", token);
+      //router.push({ name: "home" });
+    }
   });
+  let arr = [1, 2, 3];
+  store.commit("setMenu", arr);
+  arr.push(4);
+  let a = store.commit("getMenu");
+  console.log(a);
   //用mock模拟后端返回登陆权限
   // const token = Mock.Random.guid()
   // store.commit('setToken',token)

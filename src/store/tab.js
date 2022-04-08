@@ -23,6 +23,6 @@ export default {
     },
     closeTab(state, index) {
       state.tabList.splice(index, 1)
-    },
+    }
   }
 }
