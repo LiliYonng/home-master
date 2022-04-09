@@ -113,7 +113,6 @@ const currentPage = ref(1);
 const getData = (name = "", page) => {
   getUserData({ name, page })
     .then((res) => {
-      console.log(res);
       if (res.status === 200) {
         userData.value = res.data.userData.map((item) => {
           item.sex = item.sex === 0 ? "女" : "男";
@@ -202,7 +201,7 @@ const cancle = () => {
 };
 watch(currentPage, () => {
   //当前页改变时刷新页面
-  console.log("改变后的页数" + currentPage.value);
+
   getData(null, currentPage.value);
 });
 

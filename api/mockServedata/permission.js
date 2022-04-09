@@ -5,9 +5,10 @@ const userList = [
     account: 'admin',
     password: 'admin',
     token: Mock.Random.guid(),
-    identity: 'Admin',
+
     userInfo: {
-      name: '超级管理员',
+      identity: '超级管理员',
+      name: 'Admin',
       Profilephoto: '/adminImg.jpg',
       date: Mock.mock('@date("2022-MM-dd")'),
       location: Mock.mock('@province')
@@ -17,8 +18,9 @@ const userList = [
     account: 'dengwaner',
     password: '123456',
     token: Mock.Random.guid(),
-    identity: 'Ordinary',
+
     userInfo: {
+      identity: '普通用户',
       name: '邓邓等等噔',
       Profilephoto: '/userImg1.jpg',
       date: Mock.mock('@date("2022-MM-dd")'),
@@ -29,8 +31,9 @@ const userList = [
     account: 'wangzhiying',
     password: '654321',
     token: Mock.Random.guid(),
-    identity: 'Ordinary',
+
     userInfo: {
+      identity: '普通用户',
       name: '王志英小号',
       Profilephoto: '/userImg2.jpg',
       date: Mock.mock('@date("2022-MM-dd")'),
@@ -109,7 +112,10 @@ export default {
             ? {
                 code: 200,
                 token: item.token,
-                menu: item.identity === 'Admin' ? manageMenu : normalMenu,
+                menu:
+                  item.userInfo.identity === '超级管理员'
+                    ? manageMenu
+                    : normalMenu,
                 userInfo: item.userInfo
               }
             : { code: 600, ERR_Msg: '用户密码错误' }

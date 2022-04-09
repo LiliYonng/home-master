@@ -58,7 +58,6 @@ export default {
   //获取用户数据或搜索
   getUserData: (config) => {
     const { name, page = 1, limit = 20 } = getParam(config.url) //解析url参数并返回，若不带参，则参数为默认值
-    console.log(page)
     const totalList = name
       ? userData.filter((item) => {
           return item.name === name || item.addr === name ? true : false
@@ -82,7 +81,6 @@ export default {
   addUserData: (config) => {
     const newData = JSON.parse(config.body)
     newData.id = Mock.Random.guid()
-    console.log(newData)
     userData.push(newData)
   },
   deleteUserData: (config) => {

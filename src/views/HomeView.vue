@@ -7,7 +7,7 @@
           <img :src="userImg" />
           <div class="userinfo">
             <p class="name">昵称:{{ userInfo.name }}</p>
-            <p class="acess">普通用户</p>
+            <p class="acess">{{ userInfo.identity }}</p>
           </div>
         </div>
         <div class="login-info">
@@ -20,7 +20,7 @@
         </div>
       </el-card>
       <!-- 列表展示购买数据tableData-->
-      <el-card style="margin-top: 20px; height: 400px">
+      <el-card style="margin-top: 20px; height: auto">
         <el-table :data="tableData" style="width: 100%">
           <el-table-column
             v-for="(val, key, index) in tableLabel"

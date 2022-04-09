@@ -1,15 +1,6 @@
 <template>
   <router-view />
 </template>
-<script setup>
-import { onUnmounted } from "vue";
-onUnmounted(() => {
-  // window.onbeforeunload = ()=> {
-  //       var storage = window.localStorage;
-  //       storage.clear()
-  //     }
-});
-</script>
 <style>
 html,
 body,
