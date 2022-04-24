@@ -1,6 +1,6 @@
 import { watchEffect, ref } from 'vue'
 import * as echarts from 'echarts'
-//不是组件，而是函数，调用时才画表格。那么返回呢，返回什么？返回函数调用的接口,传入的是option和引用的dom
+//返回函数调用的接口,传入的是option和引用的dom
 export function useEchart(option, chart) {
   let myChart = null
   let chartOption = null

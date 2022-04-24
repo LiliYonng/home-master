@@ -1,27 +1,29 @@
 <template>
-  <div class="login-container">
-    <el-form ref="formRef" class="login-form" :rules="rules" :model="form">
-      <div class="login-title">
-        <h3 class="title">用户登录</h3>
-      </div>
-      <el-form-item prop="UserName">
-        <el-icon :size="20" class="svg-container">
-          <user />
-        </el-icon>
-        <el-input v-model="form.UserName" />
-      </el-form-item>
-      <el-form-item prop="Password">
-        <el-icon :size="20" class="svg-container">
-          <edit />
-        </el-icon>
-        <el-input type="password" v-model="form.Password" />
-      </el-form-item>
-      <el-form-item
-        ><el-button type="primary" class="login-button" @click="submitForm"
-          >登陆</el-button
-        ></el-form-item
-      >
-    </el-form>
+  <div class="login">
+    <div class="login-container">
+      <el-form ref="formRef" class="login-form" :rules="rules" :model="form">
+        <div class="login-title">
+          <h3 class="title">用户登录</h3>
+        </div>
+        <el-form-item prop="UserName">
+          <el-icon :size="20" class="svg-container">
+            <user />
+          </el-icon>
+          <el-input v-model="form.UserName" />
+        </el-form-item>
+        <el-form-item prop="Password">
+          <el-icon :size="20" class="svg-container">
+            <edit />
+          </el-icon>
+          <el-input type="password" v-model="form.Password" />
+        </el-form-item>
+        <el-form-item
+          ><el-button type="primary" class="login-button" @click="submitForm"
+            >登陆</el-button
+          ></el-form-item
+        >
+      </el-form>
+    </div>
   </div>
 </template>
 <script setup>
@@ -61,12 +63,22 @@ const submitForm = () => {
 </script>
 
 <style lang="less" scoped>
+.login {
+  height: 100%;
+  width: 100%;
+  background-image: url(~@/assets/loginBackground.png);
+  background-size: 100% 100%;
+  position: fixed;
+}
 .login-container {
   width: 350px;
   margin: 200px auto;
   padding: 10px 10px 5px 10px;
   border: 1px solid #fff;
-  box-shadow: 0 0 25px #cac6c6;
+  color: rgb(136, 152, 189);
+  box-shadow: 0 0 25px rgb(203, 203, 203);
+  // background-color: rgba(180, 198, 240, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   .el-input {
     width: 80%;
   }
@@ -78,8 +90,6 @@ const submitForm = () => {
   margin: 5px auto 0 auto;
 }
 .svg-container {
-  vertical-align: right;
-  padding: 6px 5px 6px 15px;
   display: inline-block;
   margin: 10px 0;
 }
