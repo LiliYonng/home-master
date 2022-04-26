@@ -2,8 +2,8 @@ import Mock from 'mockjs'
 //用户数据
 const userList = [
   {
-    account: 'admin',
-    password: 'admin',
+    account: '123',
+    password: '123',
     token: Mock.Random.guid(),
 
     userInfo: {
