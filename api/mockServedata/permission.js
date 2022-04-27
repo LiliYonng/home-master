@@ -15,8 +15,8 @@ const userList = [
     }
   },
   {
-    account: 'dengwaner',
-    password: '123456',
+    account: 'user',
+    password: 'user',
     token: Mock.Random.guid(),
 
     userInfo: {
