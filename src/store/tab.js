@@ -1,3 +1,4 @@
+
 export default {
   state: {
     isCollapse: false,
@@ -19,10 +20,19 @@ export default {
       const res = state.tabList.findIndex((item) => item.name === val.name)
       if (res === -1) {
         state.tabList.push(val)
+        let list = JSON.stringify(state.tabList);
+        sessionStorage.setItem('tabList',list);
       }
+    },
+    getTap(state){
+      let list = sessionStorage.getItem('tabList');
+      if(list)
+      state.tabList = JSON.parse(list);
     },
     closeTab(state, index) {
       state.tabList.splice(index, 1)
+      let list = JSON.stringify(state.tabList);
+      sessionStorage.setItem('tabList',list);
     }
   }
 }

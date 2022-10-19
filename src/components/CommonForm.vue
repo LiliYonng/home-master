@@ -18,20 +18,20 @@
         :placeholder="'请输入' + item.label"
       />
       <el-input
-        v-if="item.type === 'input' && item.requiredType === 'num'"
+        v-else-if="item.type === 'input' && item.requiredType === 'num'"
         v-model.number="formData[item.name]"
         :placeholder="'请输入' + item.label"
       />
-      <el-switch v-if="item.type === 'switch'" v-model="formData[item.name]" />
+      <el-switch v-else-if="item.type === 'switch'" v-model="formData[item.name]" />
       <el-date-picker
-        v-if="item.type === 'date'"
+        v-else-if="item.type === 'date'"
         type="date"
         value-format="YYYY-MM-DD"
         placeholder="请选择日期"
         v-model="formData[item.name]"
       />
       <el-select
-        v-if="item.type === 'select'"
+        v-else-if="item.type === 'select'"
         placeholder="请选择"
         v-model="formData[item.name]"
       >
@@ -42,6 +42,7 @@
           :value="item.value"
         ></el-option>
       </el-select>
+      <el-input v-else v-model="formData[item.name]" :placeholder="'请输入' + item.label" type="item.type"></el-input>
     </el-form-item>
     <el-form-item><slot></slot></el-form-item>
     <el-form-item class="button">

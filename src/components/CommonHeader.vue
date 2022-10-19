@@ -18,7 +18,7 @@
     <div class="right-container">
       <el-dropdown size="small" trigger="click">
         <span>
-          <img :src="userImg" class="user" />
+          <img src='../assets/userImg1.jpg' class="user" />
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -52,13 +52,14 @@ const selectMenu = (item) => {
   Store.commit("selectMenu", item);
 };
 const logout = () => {
+  localStorage.removeItem('refreshToken');
   Store.commit("clearToken");
   Store.commit("clearMenu");
   Store.commit("clearUserInfo");
   Router.push({ name: "login" });
 };
 onMounted(() => {
-  userImg.value = require("../assets" + Store.state.user.userInfo.Profilephoto);
+  // userImg.value = require("../assets" + Store.state.user.userInfo.Profilephoto);
 });
 </script>
 

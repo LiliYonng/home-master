@@ -1,13 +1,13 @@
 <template>
   <el-menu
-    default-active="2"
+    default-active="1"
     class="el-menu-vertical-demo"
     :collapse="$store.state.tab.isCollapse"
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#ffd04b"
   >
-    <h3>{{ $store.state.tab.isCollapse ? "后台" : "通用后台管理系统" }}</h3>
+    <h3 @click ="hello()">{{ $store.state.tab.isCollapse ? "后台" : "商域后台管理系统" }}</h3>
 
     <el-menu-item
       v-for="item in noChildren"
@@ -63,6 +63,7 @@ const activeName = computed(() => {
   const active = Store.state.tab.active;
   return active ? active.name : null;
 });
+
 onMounted(() => {
   menu.value = store.state.menu.menuData;
 });

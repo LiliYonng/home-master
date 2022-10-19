@@ -7,5 +7,5 @@ Mock.mock(/\/api\/user\/getData/, userApi.getUserData)
 Mock.mock(/user\/add/, userApi.addUserData)
 Mock.mock(/user\/delete/, userApi.deleteUserData)
 Mock.mock(/user\/edit/, userApi.editUserData)
-Mock.mock(/login\/getPermission/, permissionApi.getPermi)
+//Mock.mock(/login\/getPermission/, permissionApi.getPermi)
 //正则表达式匹配部分url 字符串则匹配全部url

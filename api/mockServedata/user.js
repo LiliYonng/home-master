@@ -13,30 +13,6 @@ for (let i = 0; i < count; i++) {
     })
   )
 }
-const userLable = [
-  {
-    name: 'name',
-    label: '姓名'
-  },
-  {
-    name: 'age',
-    label: '年龄'
-  },
-  {
-    name: 'sex',
-    label: '性别'
-  },
-  {
-    name: 'birth',
-    label: '出生日期',
-    width: 200
-  },
-  {
-    name: 'addr',
-    label: '地址',
-    width: 200
-  }
-]
 //解析get请求中url的附带参数
 //post请求参数在config.body中附带
 function getParam(url) {
@@ -73,7 +49,6 @@ export default {
     return {
       total: totalPage,
       userData: pageList,
-      userLable: userLable
     }
   },
 

@@ -5,17 +5,17 @@
         <div class="login-title">
           <h3 class="title">用户登录</h3>
         </div>
-        <el-form-item prop="UserName">
+        <el-form-item prop="account">
           <el-icon :size="20" class="svg-container">
             <user />
           </el-icon>
-          <el-input v-model="form.UserName" />
+          <el-input v-model="form.account" />
         </el-form-item>
-        <el-form-item prop="Password">
+        <el-form-item prop="psw">
           <el-icon :size="20" class="svg-container">
             <edit />
           </el-icon>
-          <el-input type="password" v-model="form.Password" />
+          <el-input type="password" v-model="form.psw" />
         </el-form-item>
         <el-form-item
           ><el-button type="primary" class="login-button" @click="submitForm"
@@ -32,32 +32,30 @@ import { Edit, User } from "@element-plus/icons-vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { getPermission } from "../../api/data";
-const form = ref({ UserName: "", Password: "" });
+const form = ref({ account: "", psw: "" });
 const rules = ref({
-  UserName: [
+  account: [
     { required: true, message: "Please input Activity name", trigger: "blur" },
     { min: 3, message: "用户名长度不少于3", trigger: "blur" },
   ],
-  Password: [{ required: true, message: "请输入正确的密码", trigger: "blur" }],
+  psw: [{ required: true, message: "请输入正确的密码", trigger: "blur" }],
 });
 const formRef = ref(null);
 const router = useRouter();
 const store = useStore();
 const submitForm = () => {
   getPermission(form.value)
-    .then((res) => {
-      if (res.data.code === 200) {
-        store.commit("setToken", res.data.token);
-        store.commit("setMenu", res.data.menu);
-        store.commit("setUserInfo", res.data.userInfo);
+    .then(({data:res}) => {
+        localStorage.setItem('refreshToken',res.token.refreshToken);
+        store.commit("setToken", res.token.accessToken);
+        store.commit("setMenu", res.menu);
+        store.commit("setUserInfo", res.userInfo);
         store.commit("addMenu", router);
         router.push({ name: "home" });
-      } else if (res.data.code === 600) ElMessage.error("密码错误，请重试");
-      else if (res.data.code === 601) ElMessage.error("用户不存在，请注册账号");
-      else return;
+
     })
-    .catch((res) => {
-      console.log(res);
+    .catch((error) => {
+      ElMessage.error(error.msg);
     });
 };
 </script>

@@ -1,29 +1,44 @@
-import Cookies from 'js-cookie'
+
 export default {
   state: { menuData: [] },
   mutations: {
     setMenu(state, val) {
-      state.menuData = val
-      if (Object.keys(val).length) Cookies.set('menu', JSON.stringify(val)) //对象需要转换为json格式才能存入json
+      let menuAry = val;
+      let menu = [];
+      //menu数据处理
+      menuAry.forEach(child=>{
+        if(child.parent_id)
+        {
+          menuAry.forEach(parent=>{
+            if(parent.id ==child.parent_id)
+            {
+              if(parent.children)
+                parent.children.push(child);
+              else
+                parent.children = [child];
+            }
+          })
+        }
+        else
+         menu.push(child);
+      })
+      state.menuData =[...menu];
+      if (Object.keys(menu).length) localStorage.setItem('menu', JSON.stringify(menu)) //对象需要转换为json格式才能存入json
     },
     clearMenu(state) {
       state.menuData = []
-      Cookies.remove('menu')
+      localStorage.removeItem('menu')
     },
     getMenu(state, router) {
-      const data = Cookies.get('menu')
+      const data = localStorage.getItem('menu')
       if (data) {
         state.menuData = JSON.parse(data)
         this.commit('addMenu', router)
       }
     },
     addMenu(state, router) {
-      if (!Cookies.get('menu')) {
-        return
-      }
-      const menu = JSON.parse(Cookies.get('menu'))
-      state.menuData = menu
-      const menuRoute = []
+      const menu = state.menuData;
+      const menuRoute = [];
       menu.forEach((item) => {
         if (item.children) {
           //存在二级菜单
@@ -39,7 +54,10 @@ export default {
       })
       //动态路由添加
       menuRoute.forEach((item) => {
-        router.addRoute('main', item)
+        if(item.name=='user')
+          router.addRoute('main',{path:item.path,name:item.name,component:item.component,meta:{ keepAlive:true } });
+        else
+          router.addRoute('main',{path:item.path,name:item.name,component:item.component});
       })
     }
   }

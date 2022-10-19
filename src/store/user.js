@@ -8,8 +8,8 @@ export default {
   mutations: {
     setToken(state, val) {
       if (!val) return
-      state.token = val
-      Cookies.set('token', val)
+      state.token = val;
+      Cookies.set('token',val);
     },
     getToken(state) {
       state.token = state.token || Cookies.get('token')
@@ -19,18 +19,18 @@ export default {
       Cookies.remove('token')
     },
     getUserInfo(state) {
-      const data = Cookies.get('userInfo')
+      const data = localStorage.getItem('userInfo')
       if (data) {
         state.userInfo = JSON.parse(data)
       }
     },
     setUserInfo(state, val) {
       state.userInfo = val
-      if (Object.keys(val).length) Cookies.set('userInfo', JSON.stringify(val))
+      if (Object.keys(val).length) localStorage.setItem('userInfo', JSON.stringify(val))
     },
     clearUserInfo(state) {
       state.userInfo = {}
-      Cookies.remove('userInfo')
+      localStorage.removeItem('userInfo')
     }
   }
 }

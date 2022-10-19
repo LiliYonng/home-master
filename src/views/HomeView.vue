@@ -4,7 +4,7 @@
       <el-card shadow="hover">
         <!--用户卡片展示用户数据userInfo-->
         <div class="user">
-          <img :src="userImg" />
+          <img src='../assets/userImg1.jpg' />
           <div class="userinfo">
             <p class="name">昵称:{{ userInfo.name }}</p>
             <p class="acess">{{ userInfo.identity }}</p>
@@ -12,10 +12,10 @@
         </div>
         <div class="login-info">
           <p>
-            上次登陆的时间:<span>{{ userInfo.date }}</span>
+            上次登陆的时间:<span>{{ userInfo.lastDate }}</span>
           </p>
           <p>
-            上次登陆的地点:<span>{{ userInfo.location }}</span>
+            上次登陆的地点:<span>{{ userInfo.lastLocation }}</span>
           </p>
         </div>
       </el-card>
@@ -76,7 +76,7 @@ import { onMounted, ref } from "vue";
 import { getData } from "../../api/data.js";
 import { useStore } from "vuex";
 const store = useStore();
-const userImg = ref("");
+
 const tableData = ref([]);
 const tableLabel = ref({});
 const countData = ref([]);
@@ -108,12 +108,12 @@ const barChart = ref(null);
 
 onMounted(() => {
   userInfo.value = store.state.user.userInfo;
-  userImg.value = require("../assets" + userInfo.value.Profilephoto);
+  // userImg.value = require("../assets" + userInfo.value.Profilephoto);
   //getData是二次封装的axios请求，使用mock拦截请求返回模拟数据
   getData()
     .then((res) => {
-      const { code, data } = res.data;
-      if (code === 20000) {
+      console.log(res);
+      const data = res.data;
         //获取表格数据
         tableData.value = data.tableData;
         tableLabel.value = data.tableLabel;
@@ -166,7 +166,7 @@ onMounted(() => {
           data: data.videoData.data,
         });
         useEchart(chartOption.value.videoData, pieChart.value);
-      }
+      
     })
     .catch((err) => console.log(err.message));
 });
