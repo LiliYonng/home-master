@@ -150,7 +150,7 @@ cancle() {
 }
 .search {
   .el-input {
-    width: 180px;
+    width: 10rem;
   }
 }
 .pagination {

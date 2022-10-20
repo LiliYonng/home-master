@@ -2,12 +2,12 @@
   <el-menu
     default-active="1"
     class="el-menu-vertical-demo"
-    :collapse="$store.state.tab.isCollapse"
+    :collapse="isCollapse"
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#ffd04b"
   >
-    <h3 @click ="hello()">{{ $store.state.tab.isCollapse ? "后台" : "商域后台管理系统" }}</h3>
+    <h3>{{ isCollapse ? "后台" : "商域后台管理系统" }}</h3>
 
     <el-menu-item
       v-for="item in noChildren"
@@ -47,6 +47,9 @@ import { useStore } from "vuex";
 const Router = useRouter();
 const Store = useStore();
 const menu = ref([]);
+const isCollapse = computed(()=>{
+  return store.state.tab.isCollapse;
+})
 const noChildren = computed(() => {
   return menu.value.filter((item) => !item.children);
 });

@@ -1,7 +1,7 @@
 
 export default {
   state: {
-    isCollapse: false,
+    isCollapse: true,
     active: null,
     tabList: [
       {
@@ -12,6 +12,9 @@ export default {
     ]
   },
   mutations: {
+    autoMenu(state,val){
+      state.isCollapse = val;
+    },
     handleMenu(state) {
       state.isCollapse = !state.isCollapse
     },

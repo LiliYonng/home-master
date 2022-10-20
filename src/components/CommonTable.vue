@@ -10,7 +10,7 @@
     >      
     <template #default="scope" >
           <div v-if="item.name =='img'" style="display: flex; align-items: center">
-               <el-image  style="width: 70px; height: 70px" :src="scope.row.img" alt="" :fit="fill" ></el-image>
+               <el-image  style="width: 4.375rem; height: 4.375rem" :src="scope.row.img" alt="" :fit="fill" ></el-image>
           </div>
           <el-switch v-if="item.name =='on'" v-model="scope.row.onSale" active-color="#13ce66" inactive-color="#ff4949" 
           :active-value=1
@@ -56,7 +56,7 @@ watchPostEffect(() => {
 onMounted(()=>{
   scroll_wrap.value = document.querySelector('.el-scrollbar__wrap');
   tableView.value=document.querySelector('.el-scrollbar__view');
-  tableView.value.style.height = '2471px';
+  tableView.value.style.height = '127.5625rem';
   let bar = scroll_wrap.value;
   const handleScroll = function(e){
    scrollTop.value = e.target.scrollTop;
@@ -89,7 +89,7 @@ const formatter =	function(row, column, cellValue){
 
 <style>
 .wrap_div{
-  height:2041px;
+  height:127.5625rem;
   position:absolute;
   top:0;
 

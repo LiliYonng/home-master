@@ -22,12 +22,12 @@ const tableLable =  ref([
   {
     name: 'img',
     label: '',
-    width: 120
+    width: '120rem'
   },
     {
     name: 'name',
     label: '商品名称',
-    width:200
+    width:'200rem'
   },
   {
     name: 'price',
