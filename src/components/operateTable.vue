@@ -22,7 +22,7 @@
 
   <!-- 表格操作栏 -->
   <div class="user_header">
-    <el-button type="primary" @click="addData">新增+</el-button>
+    <el-button class="addBtn" type="primary" @click="addData" v-permission ="addBtn">新增+</el-button>
     <div class="search">
       <el-input v-model="searchKey" placeholder="请输入关键词" inline="true"></el-input>
       <el-button type="primary" @click="search">搜索</el-button>
@@ -33,6 +33,7 @@
     <common-table
       v-on="$listeners"
       v-bind="$attrs"
+      :permission = "permission"
       :tableData="curTable"
       @del="deleteData"
       @edit="editData"
@@ -59,7 +60,7 @@ import store from '@/store';
 export default {
     name:'operateTable',
     components:[CommonForm,CommonTable],
-    props:["tableData","operate_formLable","rules"],
+    props:["tableData","operate_formLable","rules","permission"],
     emits: ['delte','add','update','search'],
     data(){
         return{
@@ -73,6 +74,9 @@ export default {
         }
     },
     computed: {
+        addBtn(){
+          return this.permission.addBtn;
+        },
         emptyForm(){
             let obj = {};
             this.operate_formLable.forEach(item=>{
@@ -143,12 +147,16 @@ cancle() {
 </script>
 
 <style lang="less">
-.user_header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+// .user_header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+.addBtn{
+  float:left;
 }
 .search {
+  float:right;
   .el-input {
     width: 10rem;
   }

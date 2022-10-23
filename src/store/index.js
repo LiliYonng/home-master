@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import user from './user'
 import tab from './tab'
 import menu from './menu.js'
+import permissions from './permissions'
 export default createStore({
   state: {
     screenWidth: document.body.clientWidth
@@ -16,6 +17,7 @@ export default createStore({
   modules: {
     user,
     tab,
-    menu
+    menu,
+    permissions,
   }
 })

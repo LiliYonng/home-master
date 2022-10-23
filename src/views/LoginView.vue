@@ -51,6 +51,7 @@ const submitForm = () => {
         store.commit("setMenu", res.menu);
         store.commit("setUserInfo", res.userInfo);
         store.commit("addMenu", router);
+        store.commit('setBtnPermission',res.permission);
         router.push({ name: "home" });
 
     })

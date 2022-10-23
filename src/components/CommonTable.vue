@@ -26,20 +26,27 @@
 
     <el-table-column label="操作">
       <template #default="scope">
-        <el-button type="primary" plain @click="$emit('edit', scope.row)">编辑</el-button>
-        <el-button type="danger" plain @click="$emit('del', scope.row)">删除</el-button>
+        <el-button type="primary" plain  v-permission ="editBtn" @click="$emit('edit', scope.row)">编辑</el-button>
+        <el-button type="danger" plain  v-permission ="delBtn" @click="$emit('del', scope.row)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
 </template>
 <script setup>
 import {ref,onMounted,watchPostEffect,computed} from 'vue'
-const props = defineProps(["tableData", "tableLable","itemH"]);
+const props = defineProps(["tableData", "tableLable","itemH",'permission']);
 const mytable = ref(null);
 let scroll_wrap = ref(null);
 let scrollTop = ref(0);
 let tableView = ref(null);
 let showList = ref(null);
+let editBtn = computed(()=>{
+
+  return props.permission.editBtn;
+})
+let delBtn = computed(()=>{
+  return props.permission.delBtn;
+})
 watchPostEffect(() => {
   /* 在 Vue 更新后执行 */
   if(scroll_wrap.value)

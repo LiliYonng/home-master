@@ -5,7 +5,7 @@ import * as echarts from 'echarts'
 const size = function(res){
   const clientWidth = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
 	if (!clientWidth) return;
-	let fontSize = clientWidth / 1500;
+	let fontSize = clientWidth / 1920;
 	return res*fontSize;
 }
 export function useEchart(option, chart) {

@@ -5,6 +5,7 @@
     :rules = "rules"
     :operate_formLable = "operate_formLable"
     :itemH = 88
+    :permission = "{addBtn:'addMall',editBtn:'editMall',delBtn:'delMall'}"
     @search="getData"
     @add="handleAdd"
     @update="handleEdit"
@@ -129,7 +130,6 @@ const getData = (name = "") => {
   return getMallData({name})
     .then((res) => {
       let data= JSON.parse(res);
-      console.log(data);
       tableData.value = data.mallData;
     })
     .catch((err) => console.log(err));
