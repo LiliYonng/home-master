@@ -5,13 +5,9 @@ import menu from './menu.js'
 import permissions from './permissions'
 export default createStore({
   state: {
-    screenWidth: document.body.clientWidth
   },
   getters: {},
   mutations: {
-    setScreenWidth(state,val){
-      state.screenWidth = val;
-    }
   },
   actions: {},
   modules: {

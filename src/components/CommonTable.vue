@@ -40,15 +40,16 @@ let scroll_wrap = ref(null);
 let scrollTop = ref(0);
 let tableView = ref(null);
 let showList = ref(null);
-let editBtn = computed(()=>{
 
+let editBtn = computed(()=>{
   return props.permission.editBtn;
 })
 let delBtn = computed(()=>{
   return props.permission.delBtn;
 })
+let showNum = ref(null);
 watchPostEffect(() => {
-  /* 在 Vue 更新后执行 */
+  /* 在 Vue 更新后执行,处理翻页后的容器高度和滚动条归零 */
   if(scroll_wrap.value)
     scroll_wrap.value.scrollTop = 0;
     //点击下一页时tableData的值改变，设置滚动条归零；
@@ -57,20 +58,27 @@ watchPostEffect(() => {
       let h = props.tableData?.length * props.itemH;
       if(h)
       tableView.value.style.height = h +'px';}
-  showList.value = props.tableData?.slice(0,8);
+  showList.value = props.tableData?.slice(0,showNum.value);
 })
 
+//动态高度，showNum根据item的高度设置
+
+const tableBody = ref(null);
 onMounted(()=>{
-  scroll_wrap.value = document.querySelector('.el-scrollbar__wrap');
-  tableView.value=document.querySelector('.el-scrollbar__view');
-  tableView.value.style.height = '127.5625rem';
-  let bar = scroll_wrap.value;
+  scroll_wrap.value = document.querySelector('.el-scrollbar__wrap');//即视口窗口，用于设置监听
+  tableView.value=document.querySelector('.el-scrollbar__view');//即相对滚动的容器，用于设置滚动条高度
+  tableBody.value = document.querySelector('.el-table__body');//即绝对定位的数据容器
+  //设置视口高度
+  tableView.value.style.height = '2041px';
+  const {clientHeight} = scroll_wrap.value;
+  showNum.value = Math.ceil(clientHeight/props.itemH);//得到视口显示的列数
   const handleScroll = function(e){
    scrollTop.value = e.target.scrollTop;
-   let start = Math.floor(scrollTop.value/49);
-  showList.value = props.tableData.slice(0,start+8);
+   let start = Math.floor(scrollTop.value/props.itemH);
+  showList.value = props.tableData.slice(start,start+showNum.value);
+  tableBody.value.style.top = start*props.itemH+'px';
   }
-  bar.addEventListener('scroll',handleScroll);
+  scroll_wrap.value.addEventListener('scroll',handleScroll);
 })
 const formatter =	function(row, column, cellValue){
   if(column.property=='birth')
@@ -94,11 +102,18 @@ const formatter =	function(row, column, cellValue){
 
 </script>
 
-<style>
-.wrap_div{
+<style  lang='less'>
+.table{
+  .wrap_div{
   height:127.5625rem;
   position:absolute;
   top:0;
-
+}
+.el-scrollbar__view{
+  position:relative;
+}
+.el-table__body{
+  position:absolute;
+}
 }
 </style>

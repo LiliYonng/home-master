@@ -108,7 +108,6 @@ const lineChart = ref(null);
 const pieChart = ref(null);
 const barChart = ref(null);
 const screenWidth = computed(()=>{
-    // return store.state.screenWidth;
     return document.body.clientWidth;
 })
 const chartData = ref(null);
